@@ -1,4 +1,18 @@
+body {
+    background-color: black;
+}
+
 h1
 {
-    color:hotpink;
+    color:white;
 }
+
+a{
+    color: red;
+    text-decoration: none;
+}
+
+a:visited{
+    color: red;
+}
+
