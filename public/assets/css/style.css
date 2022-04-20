@@ -1,3 +1,7 @@
 /* fichier pour variables css + style globale */
 @import '_nav.css';
 @import '_footer.css';
+body
+ {
+     background-color: black;
+ }
