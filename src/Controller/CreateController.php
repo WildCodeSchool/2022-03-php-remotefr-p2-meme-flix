@@ -7,7 +7,7 @@ class CreateController extends AbstractController
     /**
      * Display home page
      */
-    public function create(): string
+    public function meme(): string
     {
         return $this->twig->render('meme/create.html.twig');
     }
