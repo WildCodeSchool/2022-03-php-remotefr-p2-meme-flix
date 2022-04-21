@@ -1,3 +1,76 @@
 /* fichier pour variables css + style globale */
 @import '_nav.css';
 @import '_footer.css';
+
+* {
+    background: black;
+
+  }
+
+.divider {
+    border: 1px solid #ccc;
+  }
+  img {
+    width: 100%;
+  }
+
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: rgb(5, 5, 5);
+    color: red;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card {
+    background-color: black;
+    margin: 3px;
+
+  }
+
+  .card-body {
+    background-color: white;
+    border-radius: 3rem;
+  }
+
+  .card-text {
+    background-color: white;
+    color: black;
+  }
+
+  .text-start {
+    color: white;
+  }
+
+  h1 {
+    color:white;
+
+}
