@@ -9,10 +9,9 @@ class MemeController extends AbstractController
      */
     public function createMeme(): string
     {
-        return $this->twig->render('meme/create.html.twig');
 
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+        if ($_SERVER["REQUEST_METHOD"] === "POST")
+        {
             $errors = [];
 
             $uploadDir = 'assets/images/';
@@ -37,5 +36,6 @@ class MemeController extends AbstractController
                 $errors[] = 'Ton image doit faire moins de 1Mo';
             }
         }
+        return $this->twig->render('meme/create.html.twig');
     }
 }
