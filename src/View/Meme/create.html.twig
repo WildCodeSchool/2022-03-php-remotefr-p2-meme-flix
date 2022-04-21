@@ -17,15 +17,11 @@
             <div class="row">
                 <div class="col">
                     <div class="container-fluid">
-                        <p class="bg-white mb-1">
+                        <p class="bg-white mb-0">
                             Quand tu comprend que tu va utiliser le MVC pour ton projet 2
                         </p>
-                            <form method="post" enctype="multipart/form-data">
-                            <label for="image">
-                                <img id="image" class="img-fluid" alt="your image"></label>
-                                <input type="file" name="image" id="image" onchange="preview_image(event)">
-
-                            </div>
+                        <img id="image" class="img-fluid" alt="your image">
+                            <input type="file" onchange="preview_image(event)"></div>
                         </div>
                         <div class="col">
                             <div>
@@ -36,8 +32,8 @@
                             <div>
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>
-                                    Catégories
-                                </option>
+                                        Catégories
+                                    </option>
                                     <option value="1">
                                         Sport
                                     </option>
@@ -45,25 +41,23 @@
                                         Vehicule
                                     </option>
                                     <option value="3">
-                                    People
-                                </option>
+                                        People
+                                    </option>
                                     <option value="3">
                                         Divers
                                     </option>
                                 </select>
                             </div>
                             <div class="mb-3 text-center">
-                                <label for="legend" class="form-label"></label>
-                                <textarea class="form-control text-center" id="legend" rows="2" placeholder="Indique ta légende"></textarea>
-                            </div>
-                            <div class="text-center">
-                                <input value="Valider" type="button" style="width: 10rem" class="btn btn-outline-danger bg-white btn-lg text-center"></input>
-
+                                <form method="post" enctype="multipart/form-data">
+                                    <label for="meme" class="form-label"></label>
+                                    <textarea class="form-control text-center" id="meme" rows="2" placeholder="Indique ta légende"></textarea>
+                                    <input value="valider" type="submit" style="width: 10rem" class="btn btn-outline-danger bg-white btn-lg text-center"></input>
                                 </form>
-                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
 <script>
     function preview_image(event)
@@ -77,4 +71,4 @@
      reader.readAsDataURL(event.target.files[0]);
     }
 </script>
-                {% endblock %}
+            {% endblock %}
