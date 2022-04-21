@@ -9,9 +9,7 @@ class MemeController extends AbstractController
      */
     public function createMeme(): string
     {
-
-        if ($_SERVER["REQUEST_METHOD"] === "POST")
-        {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors = [];
 
             $uploadDir = 'assets/images/';
