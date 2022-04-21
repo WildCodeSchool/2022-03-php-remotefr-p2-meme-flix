@@ -1,5 +1,6 @@
 * {
     background: black;
+
   }
 
 .divider {
@@ -64,3 +65,8 @@
   .text-start {
     color: white;
   }
+
+  h1 {
+    color:white;
+
+}
