@@ -11,7 +11,7 @@ return [
     'sign' => ['signController', 'sign',],
     'vote' => ['VoteController', 'vote',],
     'legals' => ['LegalsController', 'legals',],
-    'welcome' => ['WelcomeController', 'welcome',],
+    'connect' => ['ConnectController', 'connect',],
     'admin' => ['AdminController', 'admin',],
     'create' => ['CreateController', 'create',],
     'edit' => ['EditController', 'edit',],
