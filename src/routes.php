@@ -11,7 +11,7 @@ return [
     'register' => ['UserController', 'register',],
     'vote' => ['VoteController', 'vote',],
     'legals' => ['LegalsController', 'legals',],
-    'connect' => ['ConnectController', 'connect',],
+    'login' => ['UserController', 'login',],
     'welcome' => ['WelcomeController', 'welcome',],
     'admin' => ['AdminController', 'admin',],
     'create' => ['MemeController', 'createMeme',],
