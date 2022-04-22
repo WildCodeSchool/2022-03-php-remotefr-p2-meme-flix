@@ -1,0 +1,4 @@
+:root {
+    --bs-body-bg: rgb(var(--bs-black-rgb));
+    --bs-body-color: rgb(var(--bs-white-rgb));
+}
