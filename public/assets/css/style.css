@@ -1,7 +1,26 @@
 /* fichier pour variables css + style globale */
 @import '_nav.css';
 @import '_footer.css';
-body
- {
-     background-color: black;
- }
+:root {
+    --bg-primary:rgb(17, 16, 16);
+    --bs-primary:rgb(229, 9, 20);
+    --bs-secondary:rgb(178, 7, 16);
+}
+
+body {
+    background-color: var(--bg-primary);
+}
+
+h1
+{
+    color:white;
+}
+
+a{
+    color: var(--bs-primary);
+    text-decoration: none;
+}
+
+a:visited{
+    color: var(--bs-primary);
+}

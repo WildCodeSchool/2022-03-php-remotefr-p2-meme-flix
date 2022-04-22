@@ -1,8 +1,68 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/Create/create.css">{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="/assets/css/Create/create.css">
+{% endblock %}
 
 {% block content %}
-    <h1>Crée ton Mème</h1>
-    <a href="/">retour</a><br>
-{% endblock %}
+
+	<a href="/">
+		retour
+	</a>
+
+	<h1 class="text-center">
+		Modifie ton MEME
+	</h1>
+	<form method="post" enctype="multipart/form-data">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+                    <p class="bg-white mb-0">
+                        Quand tu comprend que tu va utiliser le MVC pour ton projet 2
+                    </p>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" id="image" class="img-fluid" alt="your image">
+                    <input type="file" name="image" onchange="preview_image(event)">
+				</div>
+				<div class="col-lg-6">
+
+                    <p class="text-white mt-3 text-center">
+                        Attention un message drôle est fortement recommandé :)
+                    </p>
+
+					<div>
+						<select class="form-select" aria-label="Default select example">
+							<option selected>
+								Catégories
+							</option>
+							<option value="1">
+								Sport
+							</option>
+							<option value="2">
+								Vehicule
+							</option>
+							<option value="3">
+								People
+							</option>
+							<option value="3">
+								Divers
+							</option>
+						</select>
+					</div>
+					<div class="mb-3 text-center">
+						<label for="meme" class="form-label"></label>
+						<textarea class="form-control text-center mb-5" id="meme" name="meme" rows="2" placeholder="Indique ta légende"></textarea>
+						<input value="valider" type="submit" class="btn btn-outline-danger bg-white btn-lg text-center px-4"></div>
+				</div>
+			</div>
+		</form>
+		<script>
+			function preview_image(event) {
+let reader = new FileReader();
+reader.onload = function () {
+let output = document.getElementById('image');
+output.src = reader.result;
+}
+reader.readAsDataURL(event.target.files[0]);
+}
+		</script>
+	{% endblock %}
