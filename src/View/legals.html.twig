@@ -1,8 +1,23 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/legals.css">{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/legals.css">
+    {% endblock %}
 
-{% block content %}
-    <h1>Mentions Légales</h1>
-    <a href="/">retour</a><br>
-{% endblock %}
+    {% block content %}
+    <a href="/">
+        retour
+    </a>
+        <h1 class="mt-5 mb-5 text-center">
+            Mentions Légales
+        </h1>
+            <div class="container">
+            <p class="text-white text-center justify-content-center m-4 lh-lg">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas, animi aspernatur quaerat, accusantium sint voluptatum aliquid nemo reprehenderit eveniet tempora amet, veritatis obcaecati incidunt voluptatibus. Dicta nostrum facere ipsam dolorum.
+                <br><br>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic doloribus molestiae non quasi dicta, similique nesciunt enim vitae at explicabo molestias dolores quas facilis porro, tempora iure architecto in atque!
+                    <br><br>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae quia aliquid iste ex voluptas velit, ab quibusdam ducimus cumque, non voluptate? Debitis voluptatem ex id maiores perspiciatis laboriosam accusamus similique?
+                    </p>
+                </div>
+                {% endblock %}
