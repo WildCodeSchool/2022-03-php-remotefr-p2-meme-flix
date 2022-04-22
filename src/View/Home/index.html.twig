@@ -41,7 +41,7 @@
 				<!-- Swiper -->
 				<div class="swiper-container overflow-hidden w-100">
 					<div class="swiper-wrapper">
-						{% for i in 1..15 %}
+						{% for i in 1..30 %}
 							<div class="swiper-slide">
 								<div class="d-flex flex-column">
 									<h3 class="p-2 text-center bg-white">
@@ -70,13 +70,32 @@ navigation: {
 nextEl: '.swiper-button-next',
 prevEl: '.swiper-button-prev'
 },
-slidesPerView: 7,
-spaceBetween: 15,
+spaceBetween: 20,
 loop: false,
 pagination: {
 el: ".swiper-pagination",
 clickable: true
-}
+},
+breakpoints: {
+    // when window width is >= 320px
+    320: {
+      slidesPerView: 3,
+    },
+    // when window width is >= 480px
+    768: {
+      slidesPerView: 4,
+
+    },
+    992: {
+      slidesPerView: 5,
+
+    },
+    // when window width is >= 640px
+    1400: {
+      slidesPerView: 7,
+
+    }
+  }
 });
 	</script>
 {% endblock %}
