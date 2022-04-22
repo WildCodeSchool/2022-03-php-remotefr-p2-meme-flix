@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/Private/admin.css">
+    {% endblock %}
+
+    {% block content %}
+        <a href="/">
+            retour
+
+        </a>
+        <br>
+            <h1 class="text-center mb-5">
+                Met ton grain de sel
+
+            </h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <p class="bg-white mb-1 p-1 rounded">
+                            Quand tu comprend que tu va utiliser le MVC pour ton projet 2
+
+
+                        </p>
+                        <img id="image" src="http://lusile17.l.u.pic.centerblog.net/o/ca4f5ca4.jpg" class="img-fluid" alt="your image"></div>
+
+                        <div class="col-lg-7">
+                            <p class="text-white mt-3 text-center">
+                                Attention un message drôle est fortement recommandé :)
+
+                            </p>
+                            {% set messages = [
+                {content: "Quand tu t'aperçois qu'il y a 50 div fermé dans ton HTML"},
+                {content: "Quand le client regarde tes Pull Request"},
+                {content: "Quand le client regarde tes Pull Request"},
+                {content: "Quand le client regarde tes Pull Request"},
+                            ] %}
+                            {% for message in messages %}
+                                <div class="row">
+                                    <div class="col-8">
+                                        <p class="bg-white p-1 rounded">
+                                            {{ message.content }}
+                                        </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#">
+                                            <img src="assets/images/pngegg.png" height="20px" alt="thumb_up" />
+                                        </a>
+                                    </div>
+                                    <div class="col-2">
+                                        <p class="text-white">
+                                            85
+
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="row">
+                            <div class="col-8">
+                                <label for="addLegend" class="form-label text-white">Ajoute ta légende</label>
+                                <textarea class="form-control" id="addLegend" rows="2"></textarea>
+                            </div>
+
+                            <div class="col-4 mt-5">
+                                <button type="submit" ><img src="assets/images/plus.png" height="20px" alt="thumb_up" /></button>
+                            </div>
+
+                              <div class="row">
+                                <div class="col text-center mt-5">
+                                    <button type="button" style="width: 10rem" class="btn btn-outline-danger bg-white btn-lg text-center">
+                                        Valider
+
+                                    </button>
+                                    <p class="mt-3 text-justify">
+                                        Attention tout contenu pornographiques, injurieux, racistes où ne correspondant pas aux valeurs de respect sera soumis à une modération.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
