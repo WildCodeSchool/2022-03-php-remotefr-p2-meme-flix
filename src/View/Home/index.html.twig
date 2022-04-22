@@ -1,11 +1,17 @@
 {% extends 'layout.html.twig' %}
 
+<<<<<<< HEAD
 {% block stylesheet %}
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="/assets/css/swiper.css">
 {% endblock %}
 
 {% block content %}
+<a href="/register">Inscription</a><br>
+<a href="/edit">Modifie ton MEME</a><br>
+<a href="/admin">Admin</a><br>
+<a href="/legals">Mentions Légales</a><br>
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col  d-flex flex-column">
@@ -47,7 +53,7 @@
 										Toi le matin quand t'as la tête dans le fond de ton séant .......................... c'est à dire ton cul
 										{{ loop.index }}
 									</h3>
-									<a href="/" class="stretched-link"></a>
+									<a href="/vote" class="stretched-link"></a>
 									<img src="https://picsum.photos/200?random={{ loop.index }}" class="img-fluid rounded-bottom" alt="...">
 								</div>
 							</div>
@@ -93,4 +99,15 @@ breakpoints: {
     }
 });
 	</script>
+=======
+{% block content %}
+    <h1>Meme Flix</h1>
+    <a href="/register">Inscription</a><br>
+    <a href="/welcome">Bienvenue</a><br>
+    <a href="/vote">Vote</a><br>
+    <a href="/create">Crée ton MEME</a><br>
+    <a href="/edit">Modifie ton MEME</a><br>
+    <a href="/admin">Admin</a><br>
+    <a href="/legals">Mentions Légales</a><br>
+>>>>>>> c9e790fe2ce7eaa9120a8990dc2fe303767046e5
 {% endblock %}
