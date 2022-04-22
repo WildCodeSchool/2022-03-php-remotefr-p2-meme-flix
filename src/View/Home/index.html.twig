@@ -1,87 +1,96 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheet %}<link rel="stylesheet" href="/assets/css/Users/index.css">{% endblock %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/assets/css/swiper.css">
+{% endblock %}
 
 {% block content %}
-    <h1>Meme Flix</h1>
-    <a href="/sign">Inscription</a><br>
-    <a href="/welcome">Bienvenue</a><br>
-    <a href="/vote">Vote</a><br>
-    <a href="/create">Crée ton MEME</a><br>
-    <a href="/edit">Modifie ton MEME</a><br>
-    <a href="/admin">Admin</a><br>
-    <a href="/legals">Mentions Légales</a><br>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col  d-flex flex-column">
+									<h3 class="p-2 text-center bg-white rounded-top mx-auto" style="width: 30%">
+										Toi le matin quand t'as la tête dans
+									</h3>
+									<a href="/" class="stretched-link"></a>
+									<img src="https://picsum.photos/200/200?random={{ loop.index }}" class=" rounded mx-auto" style="width: 30%; alt="...">
+								</div>
+			<div class="col fs-1 d-flex align-items-center justify-content-center">
+				<h1>Toi aussi crée ton MEME</h1>
+				<a href="/create" class="stretched-link"></a>
+			</div>
+		</div>
+	</div>
+	{% set categories = [
+        {categorie: "Top 10"},
+        {categorie: "Nouveautés"},
+        {categorie: "Catégorie 1"},
+        {categorie: "Catégorie 2"},
+        {categorie: "Catégorie 3"},
+        {categorie: "Catégorie 4"},
+    ] %}
+	{% for categorie in categories %}
+		<section class="text">
+			<div class="container-fluid ">
+				<div class="row text-start ">
+					<div class="col-md-12 ">
+						<h2>{{categorie.categorie}}</h2>
+					</div>
+				</div>
+				<!-- Swiper -->
+				<div class="swiper-container overflow-hidden w-100">
+					<div class="swiper-wrapper">
+						{% for i in 1..15 %}
+							<div class="swiper-slide">
+								<div class="d-flex flex-column ">
+									<h3 class="p-2 text-center bg-white rounded-top">
+										Toi le matin quand t'as la tête dans le fond de ton séant .......................... c'est à dire ton cul
+										{{ loop.index }}
+									</h3>
+									<a href="/" class="stretched-link"></a>
+									<img src="https://picsum.photos/200?random={{ loop.index }}" class="img-fluid rounded-bottom" alt="...">
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endfor %}
+{% endblock %}
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"></head><script type="module">
-import Swiper from 'https://unpkg.com/swiper@8/swiper-bundle.esm.browser.min.js'
-const swiper = new Swiper('.swiper-container', {
+{% block javascript %}
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script>
+		let swiper = new Swiper('.swiper-container', {
 navigation: {
 nextEl: '.swiper-button-next',
 prevEl: '.swiper-button-prev'
 },
-slidesPerView: 1,
+
 spaceBetween: 15,
 loop: true,
 pagination: {
 el: ".swiper-pagination",
-clickable: true,
+clickable: true
 },
-
-});</script><link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/><script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script><div class="row">
-
-<div class="col d-flex justify-content-center" dark>
-	<div class="card border-dark" style="width: 30rem; ">
-		<div class="card-body d-lg-block">
-			<p class="card-text text-center" >Toi qui cherche une nouvelle idée</p>
-		</div>
-		<img src="https://picsum.photos/200?random=25" class="card-img-top" alt="...">
-	</div>
-</div>
-<div class="col fs-1 d-flex align-items-center justify-content-center">
-	 <h1 >Toi aussi crée ton MEME</h1>
-     <a href="/create" class="stretched-link"></a>
-</div></div>
-
-
-
-{% set categories = [
-                {categorie: "Top 10"},
-                {categorie: "Nouveautés"},
-                {categorie: "Catégorie 1"},
-                {categorie: "Catégorie 2"},
-                {categorie: "Catégorie 3"},
-                {categorie: "Catégorie 4"},
-            ] %}{% for categorie in categories %}
-<div class="container-fluid">
-	<div class="row text-start ">
-		<div class="col-md-12 ">
-			<h2>{{categorie.categorie}}</h2>
-		</div>
-	</div>
-</div>
-<div
-	class="row  ">
-	<!-- Swiper -->
-	<div class="swiper-container ">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide">
-				<div class="row flex-nowrap">
-					{% for i in 1..15 %}
-						<div class="card border-dark g-0" style="width: 18rem;">
-							<div class="card-body d-lg-block link">
-								<p class="card-text">Message
-									{{ loop.index }}</p>
-							</div>
-                            <a href="/" class="stretched-link"></a>
-							<img src="https://picsum.photos/200?random={{ loop.index }}" class="card-img-top" alt="...">
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-	</div>
-</div></div>{% endfor %}
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>{% endblock %}
-
-
+breakpoints: {
+    // when window width is >= 320px
+    320: {
+      slidesPerView: 2,
+    },
+    // when window width is >= 480px
+    768: {
+      slidesPerView: 3,
+    },
+    992: {
+      slidesPerView: 4,
+    },
+    // when window width is >= 640px
+    1400: {
+      slidesPerView: 6,
+    }
+    }
+});
+	</script>
+{% endblock %}
