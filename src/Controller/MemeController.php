@@ -12,7 +12,7 @@ class MemeController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors = [];
 
-            $uploadDir = 'assets/images/';
+            $uploadDir = __DIR__ . '/../../public/uploads/images/';
 
             $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
 
