@@ -1,6 +1,62 @@
 /* fichier pour variables css + style globale */
 @import '_nav.css';
 @import '_footer.css';
+@import '_variables.css';
+@import '_global.css';
+@import '_color.css';
+
+
+
+.divider {
+    border: 1px solid #ccc;
+  }
+  /* img {
+    width: 100%;
+  } */
+
+  .swiper-container {
+    width: 100%;
+  }
+
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .swiper {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .card {
+    background-color: black;
+
+
+  }
+
+  .card-body {
+    background-color: white;
+
+  }
+
+  .card-text {
+    background-color: white;
+    color: black;
+  }
+
+  .text-start {
+    color: white;
+  }
+
+
+
+h3 {
+
+    margin-bottom: 0;
+}
 :root {
     --bg-primary:rgb(17, 16, 16);
     --bs-primary:rgb(229, 9, 20);
