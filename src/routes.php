@@ -10,6 +10,8 @@ return [
     '' => ['HomeController', 'index',],
     'register' => ['UserController', 'register',],
     'vote' => ['VoteController', 'vote',],
+    'legals' => ['LegalsController', 'legals',],
+    'login' => ['UserController', 'login',],
     'welcome' => ['WelcomeController', 'welcome',],
     'admin' => ['AdminController', 'admin',],
     'create' => ['MemeController', 'createMeme',],
