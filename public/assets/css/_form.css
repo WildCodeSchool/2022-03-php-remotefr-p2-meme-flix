@@ -1,0 +1,11 @@
+.form-control,
+.form-control:focus{
+
+background-color: var(--form-background-priamy);
+color: var(--font-primary);
+  }
+
+#email.form-control {
+    background-color: var(--form-background-priamy);
+color: var(--font-primary);
+}

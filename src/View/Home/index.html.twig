@@ -19,7 +19,7 @@
 				<img src="https://picsum.photos/200/200?random={{ loop.index }}" class=" rounded-bottom mx-auto" style="width: 50%" ; alt="...">
 			</div>
 			<div class="col-lg-7 text-center d-flex align-items-center justify-content-center">
-				<h1>Toi aussi crée ton MEME c'est ICI</h1>
+				<h1>Toi aussi crée ton <a href="">MEME</a> c'est ICI</h1>
 				<a href="/create" class="stretched-link"></a>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<!-- Swiper -->
-				<div class="swiper-container overflow-hidden w-100">
+				<div class="swiper-container overflow-hidden w-100 position-relative">
                 <div class="swiper-wrapper">
                 {% for i in 1..15 %}
                 <div class="swiper-slide">
@@ -55,9 +55,11 @@
 								</div>
 							</div>
 						{% endfor %}
-                                <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
 					</div>
+                     <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                </div>
+
 				</div>
 			</div>
 		</section>
@@ -72,10 +74,7 @@ navigation: {
 nextEl: '.swiper-button-next',
 prevEl: '.swiper-button-prev'
 },
-slidesPerGroup:6,
-
 spaceBetween: 15,
-loop: false,
 pagination: {
 el: ".swiper-pagination",
 clickable: true
