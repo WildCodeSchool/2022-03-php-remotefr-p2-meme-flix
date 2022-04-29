@@ -24,20 +24,20 @@
 			</div>
 		</div>
 	</div>
-	{% set categories = [
-        {categorie: "Top 10"},
+	{# {% set categories = [
+        {category: "Top 10"},
         {categorie: "Nouveautés"},
         {categorie: "Catégorie 1"},
         {categorie: "Catégorie 2"},
         {categorie: "Catégorie 3"},
         {categorie: "Catégorie 4"},
-    ] %}
-	{% for categorie in categories %}
+    ] %} #}
+	{% for category in categories %}
 		<section class="text">
 			<div class="container-fluid ">
 				<div class="row text-start mb-3 mt-3">
 					<div class="col-md-12">
-						<h2>{{categorie.categorie}}</h2>
+						<h2>{{category.name}}</h2>
 					</div>
 				</div>
 				<!-- Swiper -->

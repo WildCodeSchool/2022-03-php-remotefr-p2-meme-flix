@@ -19,7 +19,7 @@
 					</p>
 
 					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" id="image" class="w-100 img-fluid rounded-bottom" alt="your image">
-                    <label for="image" class="label-file"></label>
+					<label for="image" class="label-file"></label>
 					<input type="file" name="image" id="image" class="input-file w-100 mt-3 mb-3 btn btn-outline-danger btn-lg text-center" onchange="preview_image(event)">
 				</div>
 				<div class="p-5 col-lg-6">
@@ -28,37 +28,29 @@
 						Attention un message drôle est fortement recommandé :)
 					</p>
 					<div>
-						<select class="form-select btn btn-outline-danger bg-dark text-white mb-5" aria-label="Default select example">
-							<option selected>
-								Catégories
-							</option>
-							<option value="1">
-								Sport
-							</option>
-							<option value="2">
-								Vehicule
-							</option>
-							<option value="3">
-								People
-							</option>
-							<option value="3">
-								Divers
-							</option>
+						<label for="category" class="label-file"></label>
+						<select id="category" name="category" class="form-select btn btn-outline-danger bg-dark text-white mb-5" aria-label="Default select example">
+							{% for category in categories %}
+								<option value="{{category.id}}">
+									{{category.name}}
+								</option>
+							{% endfor %}}
+
 						</select>
 					</div>
 					<div class="mb-3 mt-3 text-center">
-						<label for="meme" class="form-label"></label>
-						<textarea class="form-control text-center mb-5" id="meme" name="meme" rows="2" placeholder="Indique ta légende"></textarea>
+						<label for="legend" class="form-label"></label>
+						<textarea class="form-control text-center mb-5" id="legend" name="legend" rows="2" placeholder="Indique ta légende"></textarea>
 						<input value="valider" type="submit" style="width: 10rem" class="mb-5 mt-5 btn btn-outline-danger btn-lg text-center">
-				    </div>
-			    </div>
-            </div>
-        </div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-		</form>
+	</form>
 
-		<script>
-			function preview_image(event) {
+	<script>
+		function preview_image(event) {
 let reader = new FileReader();
 reader.onload = function () {
 let output = document.getElementById('image');
@@ -66,5 +58,5 @@ output.src = reader.result;
 }
 reader.readAsDataURL(event.target.files[0]);
 }
-		</script>
-	{% endblock %}
+	</script>
+{% endblock %}
