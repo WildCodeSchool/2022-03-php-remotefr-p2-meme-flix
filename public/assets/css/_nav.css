@@ -1,8 +1,9 @@
 
-a.nav-link:hover
+.nav-link:hover
  {
     text-decoration: underline;
     text-decoration-thickness: 3px;
     text-underline-offset: 4px;
-    
+    text-decoration-color: var(--bs-primary);
+
 }
