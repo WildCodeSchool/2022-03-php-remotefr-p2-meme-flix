@@ -61,11 +61,12 @@ class UserController extends AbstractController
                 $dataErrors[] = "invalid email format";
             }
             $hash = password_hash($credentials['password'], PASSWORD_DEFAULT);
-            $pattern = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/';
 
-            if (!$hash && strlen($hash) < 8 && preg_match($pattern, $hash)) {
-                $dataErrors[] = "invalid password format";
+
+            if (strlen($hash) < 8) {
+                $dataErrors[] = "Minimun 8 Caractères";
             }
+
 
             if ((!$dataErrors)) {
                 $userManager = new UserManager();
