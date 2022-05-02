@@ -17,22 +17,27 @@
 			</div>
 			<div class="col-lg-6 p-5">
 				<div class="card-body">
-					<form>
+					<form action="" method="post">
 						<div class="mb-4 text-white">
 							<label for="pseudo" class="form-label">Pseudo</label>
-							<input type="text" class="form-control" id="pseudo" name="pseudo"/>
+							<input type="text" class="form-control" id="pseudo" name="pseudo" required/>
 						</div>
 						<div class="mb-4 text-white">
 							<label for="email" class="form-label">Email</label>
-							<input type="text" class="form-control" id="email" name="email"/>
+							<input type="email" class="form-control" id="email" name="email" required/>
 						</div>
 						<div class="mb-4 text-white">
 							<label for="password" class="form-label">Password</label>
-							<input type="password" class="form-control" id="password" name="password"/>
+							<input type="password" class="form-control" id="password" name="password" required/>
 						</div>
 						<div class="text-center">
-							<button type="button" style="width: 10rem" class="btn btn-outline-danger bg-white btn-lg text-center">Valider</button>
+							<button type="submit" style="width: 10rem" class="mb-5 mt-5 btn btn-outline-danger btn-lg text-center">Valider</button>
 						</div>
+                        <ul class="text-white">
+                            {% for error in dataErrors %}
+                    <li>{{ error}}</li>
+                            {% endfor %}
+                        </ul>
 					</form>
 				</div>
 			</div>
