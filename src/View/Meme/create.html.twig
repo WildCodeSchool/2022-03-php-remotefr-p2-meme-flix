@@ -43,6 +43,15 @@
 						<textarea class="form-control text-center mb-5" id="legend" name="legend" rows="2" placeholder="Indique ta légende"></textarea>
 						<input value="valider" type="submit" style="width: 10rem" class="mb-5 mt-5 btn btn-outline-danger btn-lg text-center">
 					</div>
+					<ul class="text-white">
+						{% if dataErrors %}
+							<ul>
+								{% for error in dataErrors %}
+									<li>{{ error }}</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+					</ul>
 				</div>
 			</div>
 		</div>

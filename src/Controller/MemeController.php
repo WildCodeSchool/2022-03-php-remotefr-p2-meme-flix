@@ -40,7 +40,7 @@ class MemeController extends AbstractController
             // clean $_POST data
             $newMeme = array_map('trim', $_POST);
 
-            $errors = [];
+            $dataErrors = [];
 
             $uploadDir = __DIR__ . '/../../public/uploads/images/';
 
@@ -57,13 +57,13 @@ class MemeController extends AbstractController
             $maxFileSize = 1000000;
 
             if ((!in_array($extension, $authorizedExtensions))) {
-                $errors[] = 'Format invalide (gif, jpg, png, webp)';
+                $dataErrors[] = 'Format invalide (gif, jpg, png, webp)';
             }
 
             if (file_exists($_FILES['image']['tmp_name']) && filesize($_FILES['image']['tmp_name']) > $maxFileSize) {
-                $errors[] = 'Ton image doit faire moins de 1Mo';
+                $dataErrors[] = 'Ton image doit faire moins de 1Mo';
             }
-            if (empty($errors)) {
+            if (empty($dataErrors)) {
                 $newMeme['image'] = $fileName;
                 $newMeme['user_id'] = 'NULL';
                 $memeManager = new MemeManager();

@@ -10,6 +10,7 @@ class UserController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $credentials = array_map('trim', $_POST);
+            $credentials = array_map('htmlentities', $_POST);
             $dataErrors = [];
 
             if (empty($credentials["email"])) {
@@ -20,19 +21,18 @@ class UserController extends AbstractController
                 $dataErrors[] = "Password is required";
             }
 
-            if (isset($_POST["submit"]) && (!$dataErrors)) {
-                $userManager = new UserManager();
-                $user = $userManager->selectOneByEmail($credentials['email']);
+            $userManager = new UserManager();
+            $user = $userManager->selectOneByEmail($credentials['email']);
 
-                if ($user && password_verify($credentials['password'], $user['password'])) {
-                    $_SESSION['user_id'] = $user['id'];
-                    header('Location: /');
-                    return null;
-                }
+            if ($user && password_verify($credentials['password'], $user['password']) && (!$dataErrors)) {
+                $_SESSION['user_id'] = $user['id'];
+                header('Location: /');
+                return null;
             }
         }
         return $this->twig->render('Users/login.html.twig');
     }
+
 
     public function logout()
     {
@@ -46,6 +46,7 @@ class UserController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // @todo make some controls and if errors send them to the view
             $credentials = array_map('trim', $_POST);
+            $credentials = array_map('htmlentities', $_POST);
             $dataErrors = [];
 
             if (empty($credentials["pseudo"])) {
@@ -59,14 +60,14 @@ class UserController extends AbstractController
             if (!filter_var($credentials["email"], FILTER_VALIDATE_EMAIL)) {
                 $dataErrors[] = "invalid email format";
             }
-            // $hash = password_hash($credentials['password'], PASSWORD_DEFAULT);
-            // $pattern = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/';
+            $hash = password_hash($credentials['password'], PASSWORD_DEFAULT);
+            $pattern = '/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/';
 
-            // if ($hash === false && strlen($hash) <= 8 && preg_match($pattern, $hash)) {
-            //     $dataErrors[] = "invalid password format";
-            // }
+            if (!$hash && strlen($hash) < 8 && preg_match($pattern, $hash)) {
+                $dataErrors[] = "invalid password format";
+            }
 
-            if (isset($_POST["submit"]) && (!$dataErrors)) {
+            if ((!$dataErrors)) {
                 $userManager = new UserManager();
                 $userId = $userManager->insert($credentials);
                 if ($userId) {
