@@ -10,9 +10,10 @@ class MemeManager extends AbstractManager
 
     public function selectAll(string $orderBy = '', string $direction = 'ASC'): array
     {
-        $query = 'SELECT *, l.id FROM ' . LegendManager::TABLE
-            . ' AS l INNER JOIN ' . static::TABLE . ' AS m ON l.meme_id=m.id ' .
-            ' INNER JOIN ' . ImageManager::TABLE . 'AS i ON m.image_id=i.id';
+        $query = 'SELECT *, m.id FROM ' . static::TABLE . ' AS m INNER JOIN '
+        . LegendManager::TABLE . ' AS l ON l.meme_id=m.id ';
+
+
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }
