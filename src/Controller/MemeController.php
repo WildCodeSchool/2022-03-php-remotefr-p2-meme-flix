@@ -36,11 +36,12 @@ class MemeController extends AbstractController
      */
     public function add(): ?string
     {
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
+            $dataErrors = [];
             $newMeme = array_map('trim', $_POST);
 
-            $dataErrors = [];
 
             $uploadDir = __DIR__ . '/../../public/uploads/images/';
 
@@ -73,12 +74,14 @@ class MemeController extends AbstractController
                     return null;
                 }
             }
+
         }
         $categoryManager = new CategoryManager();
         $legendManager = new LegendManager();
         return $this->twig->render('Meme/create.html.twig', [
             'categories' => $categoryManager->selectAll(),
             'legends' => $legendManager->selectAll()
+
         ]);
     }
 }

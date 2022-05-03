@@ -6,31 +6,37 @@ use App\Model\UserManager;
 
 class UserController extends AbstractController
 {
-    public function login(): string|null
+    public function login(string $redirect = "/"): string|null
     {
+        $dataErrors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $credentials = array_map('trim', $_POST);
             $credentials = array_map('htmlentities', $_POST);
-            $dataErrors = [];
+
 
             if (empty($credentials["email"])) {
-                $dataErrors[] = "Email is required";
+                $dataErrors[] = "Ton adresse mail est obligatoire";
             }
 
             if (empty($credentials["password"])) {
-                $dataErrors[] = "Password is required";
+                $dataErrors[] = "Ton mot de passe est obligatoire";
             }
+            if (empty($dataErrors)) {
+                $userManager = new UserManager();
+                $user = $userManager->selectOneByEmail($credentials['email']);
 
-            $userManager = new UserManager();
-            $user = $userManager->selectOneByEmail($credentials['email']);
-
-            if ($user && password_verify($credentials['password'], $user['password']) && (!$dataErrors)) {
-                $_SESSION['user_id'] = $user['id'];
-                header('Location: /');
-                return null;
+                if ($user && password_verify($credentials['password'], $user['password']) && (!$dataErrors)) {
+                    $_SESSION['user_id'] = $user['id'];
+                    header('Location: ' . $redirect);
+                    return null;
+                } else {
+                    $dataErrors[] = "Identifiants incorrects";
+                }
             }
         }
-        return $this->twig->render('Users/login.html.twig');
+        return $this->twig->render('Users/login.html.twig', [
+            'dataErrors' => $dataErrors
+        ]);
     }
 
 
@@ -43,41 +49,44 @@ class UserController extends AbstractController
 
     public function register(): string|null
     {
+        $dataErrors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // @todo make some controls and if errors send them to the view
             $credentials = array_map('trim', $_POST);
             $credentials = array_map('htmlentities', $_POST);
-            $dataErrors = [];
 
             if (empty($credentials["pseudo"])) {
-                $dataErrors[] = "Pseudo is required";
+                $dataErrors[] = "Ton pseudo est obligatoire";
             }
 
             if (empty($credentials["email"])) {
-                $dataErrors[] = "Email is required";
+                $dataErrors[] = "Ton adresse mail est obligatoire";
             }
 
             if (!filter_var($credentials["email"], FILTER_VALIDATE_EMAIL)) {
-                $dataErrors[] = "invalid email format";
-            }
-            $hash = password_hash($credentials['password'], PASSWORD_DEFAULT);
-
-
-            if (strlen($hash) < 8) {
-                $dataErrors[] = "Minimun 8 Caractères";
+                $dataErrors[] = "Format email invalide";
             }
 
+            if (!preg_match('/\w/', $credentials['password'])) {
+                $dataErrors[] = "Le mot de passe ne doit contenir que des lettres ou chiffres";
+            }
 
-            if ((!$dataErrors)) {
+            if (strlen($credentials['password']) < 8) {
+                $dataErrors[] = "Le mot de passe doit avoir au minimun 8 Caractères";
+            }
+
+
+            if (empty($dataErrors)) {
                 $userManager = new UserManager();
                 $userId = $userManager->insert($credentials);
                 if ($userId) {
-                    $_SESSION['user_id'] = $userId;
-                    header("Location: /welcome");
+                    return $this->login("/welcome");
                 }
             }
         }
-        return $this->twig->render('Users/register.html.twig');
+        return $this->twig->render('Users/register.html.twig', [
+            'dataErrors' => $dataErrors
+        ]);
     }
 
 
