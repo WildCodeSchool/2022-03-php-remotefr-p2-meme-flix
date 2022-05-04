@@ -59,6 +59,7 @@ class UserController extends AbstractController
                 $dataErrors[] = "Ton pseudo est obligatoire";
             }
 
+
             if (empty($credentials["email"])) {
                 $dataErrors[] = "Ton adresse mail est obligatoire";
             }
