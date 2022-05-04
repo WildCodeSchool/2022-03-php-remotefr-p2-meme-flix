@@ -36,11 +36,12 @@ class MemeController extends AbstractController
      */
     public function add(): ?string
     {
+
+        $dataErrors = [];
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // clean $_POST data
             $newMeme = array_map('trim', $_POST);
 
-            $errors = [];
 
             $uploadDir = __DIR__ . '/../../public/uploads/images/';
 
@@ -50,24 +51,23 @@ class MemeController extends AbstractController
 
             $uploadFile = $uploadDir . basename($fileName);
 
-            move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
-
             $authorizedExtensions = ['jpg', 'gif', 'webp', 'png'];
 
             $maxFileSize = 1000000;
 
             if ((!in_array($extension, $authorizedExtensions))) {
-                $errors[] = 'Format invalide (gif, jpg, png, webp)';
+                $dataErrors[] = 'Format invalide (gif, jpg, png, webp)';
             }
 
             if (file_exists($_FILES['image']['tmp_name']) && filesize($_FILES['image']['tmp_name']) > $maxFileSize) {
-                $errors[] = 'Ton image doit faire moins de 1Mo';
+                $dataErrors[] = 'Ton image doit faire moins de 1Mo';
             }
-            if (empty($errors)) {
+            if (empty($dataErrors)) {
                 $newMeme['image'] = $fileName;
                 $newMeme['user_id'] = 'NULL';
                 $memeManager = new MemeManager();
                 $insertId = $memeManager->insert($newMeme);
+                move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
                 if ($insertId) {
                     header("Location: /meme/show?id=" . $insertId);
                     return null;
@@ -79,6 +79,7 @@ class MemeController extends AbstractController
         return $this->twig->render('Meme/create.html.twig', [
             'categories' => $categoryManager->selectAll(),
             'legends' => $legendManager->selectAll()
+
         ]);
     }
 }
