@@ -37,9 +37,9 @@ class MemeController extends AbstractController
     public function add(): ?string
     {
 
+        $dataErrors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $dataErrors = [];
             $newMeme = array_map('trim', $_POST);
 
 
@@ -50,8 +50,6 @@ class MemeController extends AbstractController
             $fileName = uniqid() . '.' . $extension;
 
             $uploadFile = $uploadDir . basename($fileName);
-
-            move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
 
             $authorizedExtensions = ['jpg', 'gif', 'webp', 'png'];
 
@@ -69,6 +67,7 @@ class MemeController extends AbstractController
                 $newMeme['user_id'] = 'NULL';
                 $memeManager = new MemeManager();
                 $insertId = $memeManager->insert($newMeme);
+                move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
                 if ($insertId) {
                     header("Location: /meme/show?id=" . $insertId);
                     return null;

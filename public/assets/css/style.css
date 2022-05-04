@@ -1,46 +1,10 @@
-
-.divider {
-    border: 1px solid #ccc;
-  }
-  /* img {
-    width: 100%;
-  } */
-
-  .swiper-container {
-    width: 100%;
-  }
-
-
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .swiper {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .card {
-    background-color: var(--bg-primary);
-
-
-  }
-
-  .card-body {
-    background-color: var(--bg-secondary);
-
-  }
-
-  .card-text {
-    background-color: var(--bg-secondary);
-    color: var(--font-secondary);
-  }
-
-  .text-start {
-    color: var(--font-primary);
-  }
-
-
+@import "_global.css";
+@import "_footer.css";
+@import "_nav.css";
+@import "_swipper.css";
+@import "-legals.css";
+@import "/_admin.css";
+@import "/_vote.css";
+@import "/_edit.css";
+@import "/_create.css";
+@import "_form.css";

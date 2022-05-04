@@ -19,7 +19,7 @@
 				<img src="https://picsum.photos/200/200?random={{ loop.index }}" class=" rounded-bottom mx-auto" style="width: 50%" ; alt="...">
 			</div>
 			<div class="col-lg-7 text-center d-flex align-items-center justify-content-center">
-				<h1>Toi aussi crée ton MEME c'est ICI</h1>
+				<h1>Toi aussi crée ton <a href="">MEME</a> c'est ICI</h1>
 				<a href="/create" class="stretched-link"></a>
 			</div>
 		</div>
@@ -37,27 +37,29 @@
 			<div class="container-fluid ">
 				<div class="row text-start mb-3 mt-3">
 					<div class="col-md-12">
-						<h2>{{categorie.categorie}}</h2>
+						<h2>{{category.name}}</h2>
+
 					</div>
 				</div>
 				<!-- Swiper -->
-				<div class="swiper-container overflow-hidden w-100">
+				<div class="swiper-container overflow-hidden w-100 position-relative">
                 <div class="swiper-wrapper">
-                {% for i in 1..15 %}
+                {% for meme in memes|filter(meme => meme.category_id == category.id) %}
                 <div class="swiper-slide">
                 <div class="d-flex flex-column ">
 									<h3 class="p-2 fs-5 fw-bold text-center bg-white rounded-top">
-										Toi le matin quand t'as la tête dedans
-										{{ loop.index }}
+                                        {{meme.legend}}
 									</h3>
 									<a href="/vote" class="stretched-link"></a>
-									<img src="https://picsum.photos/200?random={{ loop.index }}" class="img-fluid rounded-bottom" alt="...">
+									<img src="/uploads/images/{{ meme.image }}" class="img-fluid rounded-bottom" alt="...">
 								</div>
 							</div>
 						{% endfor %}
-                                <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
 					</div>
+                     <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                </div>
+
 				</div>
 			</div>
 		</section>
@@ -72,10 +74,7 @@ navigation: {
 nextEl: '.swiper-button-next',
 prevEl: '.swiper-button-prev'
 },
-slidesPerGroup:6,
-
 spaceBetween: 15,
-loop: false,
 pagination: {
 el: ".swiper-pagination",
 clickable: true
