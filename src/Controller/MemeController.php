@@ -73,7 +73,6 @@ class MemeController extends AbstractController
                     return null;
                 }
             }
-
         }
         $categoryManager = new CategoryManager();
         $legendManager = new LegendManager();
