@@ -105,7 +105,7 @@ ENGINE = InnoDB;
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Top 10'),(2,'Nouveautés'),(3,'Sport'),(4,'Véhicule'),(5,'People'),(6,'Divers');
+INSERT INTO `category` VALUES (1,'Sport'),(2,'Véhicule'),(3,'People'),(4,'Animaux'),(5,'Divers');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 -- -----------------------------------------------------
