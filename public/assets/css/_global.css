@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 :root {
+  --bs-primary-rgb: 229, 9, 20;
   --bg-primary: #111010;
   --bg-secondary: rgb(255, 255, 255);
-  --bs-primary: rgb(229, 9, 20);
+  --bs-primary: rgb(var(--bs-primary-rgb));
   --bs-secondary: rgb(178, 7, 16);
   --bs-font-sans-serif: 'Roboto', 'Arial', sans-serif;
   --font-primary: rgb(255, 255, 255);
