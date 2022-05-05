@@ -1,14 +1,32 @@
 <?php
 
+
 namespace App\Controller;
+
+use App\Model\LegendManager;
+use App\Model\MemeManager;
+
+
 
 class VoteController extends AbstractController
 {
-    /**
-     * Display home page
-     */
-    public function vote(): string
+
+    public function showVoteId(int $id): string
     {
-        return $this->twig->render('meme/vote.html.twig');
+        $memeManager = new MemeManager();
+        $legendManager = new LegendManager();
+        $legends = $legendManager->selectOneById($id);
+        $memes = $memeManager->selectOneById($id);
+
+        return $this->twig->render('Meme/vote.html.twig', [
+            'memes' => $memes,
+            'legends' => $legends
+
+
+
+
+        ]);
     }
+
+
 }

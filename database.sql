@@ -155,6 +155,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `memeflix`.`vote` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `rank` INT NOT NULL,
   `user_id` INT NOT NULL,
   `legend_id` INT NOT NULL,
   `legend_meme_id` INT NOT NULL,

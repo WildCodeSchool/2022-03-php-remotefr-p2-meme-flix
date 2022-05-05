@@ -10,39 +10,35 @@
 	<h1 class="text-center mb-5 mt-5">
 		Mets ton grain de sel
 	</h1>
+
 	<div class="container">
 		<div class="row">
 			<div class="p-5 col-lg-5">
 				<p class="bg-white mb-0 p-3 rounded-top text-center fw-bold">
-					Quand tu comprends que tu vas utiliser le MVC pour ton projet 2
+					{{ legends.legend }}
 				</p>
-				<img id="image" src="http://lusile17.l.u.pic.centerblog.net/o/ca4f5ca4.jpg" class="w-100 img-fluid rounded-bottom" alt="your image"></div>
+				<img id="image" src="/uploads/images/{{ memes.image }}" class="w-100 img-fluid rounded-bottom" alt="your image"></div>
 
-			<div class="p-5 col-lg-7">
-				<p class="text-white mt-3 mb-5 text-center fs-4">
+			<div class="p-5 col-lg-7 fs-5">
+				<p class="text-white mt-3 mb-5 text-center">
 					Attention un message drôle est fortement recommandé :)
 				</p>
-				{% set messages = [
-                {content: "Quand tu t'aperçois qu'il y a 50 div pas fermés dans ton HTML"},
-                {content: "Quand le client regarde tes Pull Request"},
-                {content: "Quand le client regarde tes Pull Request"},
-                {content: "Quand le client regarde tes Pull Request"},
-                            ] %}
-				{% for message in messages %}
+
+				{% for legend in legends|slice(0, 4) %}
 					<div class="row">
 						<div class="col-10">
 							<p class="bg-dark text-white p-3 rounded mt-3">
-								{{ message.content }}
+								{{ legends.legend }}
 							</p>
 						</div>
 						<div class="col-1 d-flex flex-column align-items-center">
-							<a href="#">
+							<a href="#"> {# /////bouton submit pour faire add table vote ////#}
 								<img src="assets/images/pngegg.png" class="mt-4" height="20px" alt="thumb_up"/>
 							</a>
 						</div>
 						<div class="col-1">
 							<p class="text-white text-start align-items-center mt-4">
-								85
+								{# {{ vote.? houston probleme table vote }} #}
 							</p>
 						</div>
 					</div>
@@ -64,7 +60,7 @@
 
 							</button>
 							<p class="text-justify text-white">
-								Attention tout contenu pornographique, injurieux, raciste où ne correspondant pas aux valeurs de respect sera soumis à une modération.
+								Attention tout contenu pornographiques, injurieux, racistes où ne correspondant pas aux valeurs de respect sera soumis à une modération.
 							</p>
 						</div>
 					</div>
