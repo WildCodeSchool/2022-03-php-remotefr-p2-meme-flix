@@ -34,8 +34,7 @@
 								<option value="{{category.id}}">
 									{{category.name}}
 								</option>
-							{% endfor %}}
-
+							{% endfor %}
 						</select>
 					</div>
 					<div class="mb-3 mt-3 text-center">
@@ -47,11 +46,11 @@
 						{% if dataErrors %}
 							<div class="p-0 fw-bold fs-5 list-group-item-disabled text-center" style="color:var(--bs-primary)">
 								{% for error in dataErrors %}
-                        <p>{{ error }}</p>
+									<p>{{ error }}</p>
 								{% endfor %}
 							</div>
 						{% endif %}
-                        </div>
+					</div>
 				</div>
 			</div>
 		</div>

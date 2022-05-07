@@ -15,30 +15,35 @@
 		<div class="row">
 			<div class="p-5 col-lg-5">
 				<p class="bg-white mb-0 p-3 rounded-top text-center fw-bold">
-					{{ legends.legend }}
+					{{ legend.legend }}
 				</p>
-				<img id="image" src="/uploads/images/{{ memes.image }}" class="w-100 img-fluid rounded-bottom" alt="your image"></div>
+				<img id="image" src="/uploads/images/{{ meme.image }}" class="w-100 img-fluid rounded-bottom" alt="your image"></div>
 
 			<div class="p-5 col-lg-7 fs-5">
 				<p class="text-white mt-3 mb-5 text-center">
 					Attention un message drôle est fortement recommandé :)
 				</p>
 
-				{% for legend in legends|slice(0, 4) %}
+				{% for message in legend|slice(0, 4) %}
 					<div class="row">
 						<div class="col-10">
 							<p class="bg-dark text-white p-3 rounded mt-3">
-								{{ legends.legend }}
+								{{ legend.legend }}
 							</p>
 						</div>
+
 						<div class="col-1 d-flex flex-column align-items-center">
-							<a href="#"> {# /////bouton submit pour faire add table vote ////#}
-								<img src="assets/images/pngegg.png" class="mt-4" height="20px" alt="thumb_up"/>
+							<a
+								href="/vote?id={{ legend.id }}">
+								{# @todo incrémenter legend_id de la table vote #}
+								<img src="/assets/images/thumbup.png" class="mt-4" height="20px" alt="thumb_up"/>
+                                <img src="/assets/images/thumbdown.png" class="mt-2" height="20px" alt="thumb_up"/>
 							</a>
 						</div>
 						<div class="col-1">
 							<p class="text-white text-start align-items-center mt-4">
-								{# {{ vote.? houston probleme table vote }} #}
+								{{ legend.id }}
+								{# @todo mettre l'incrément de legend_id de la table vote #}
 							</p>
 						</div>
 					</div>
@@ -50,7 +55,7 @@
 					</div>
 
 					<div class="col-2">
-						<button type="submit" class="mt-4 btn btn-primary-outline"><img src="assets/images/plus.png" height="30px" alt="plus"/></button>
+						<button type="submit" class="mt-4 btn btn-primary-outline"><img src="/assets/images/plus.png" height="30px" alt="plus"/></button>
 					</div>
 
 					<div class="row">
@@ -65,7 +70,7 @@
 						</div>
 					</div>
 				</div>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

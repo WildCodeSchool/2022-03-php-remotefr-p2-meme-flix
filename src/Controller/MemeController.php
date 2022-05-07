@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Model\CategoryManager;
-use App\Model\LegendManager;
 use App\Model\MemeManager;
+use App\Model\LegendManager;
+use App\Model\CategoryManager;
 
 class MemeController extends AbstractController
 {
@@ -20,39 +20,38 @@ class MemeController extends AbstractController
         ]);
     }
 
-    /**
-     * Show informations for a specific item
-     */
-    public function show(int $id): string
+    public function legals(): string
     {
-        $memeManager = new MemeManager();
-        $meme = $memeManager->selectOneById($id);
-
-        return $this->twig->render('Meme/vote.html.twig', ['meme' => $meme]);
+        return $this->twig->render('/legals.html.twig');
     }
 
-    /**
-     * Add a new item
-     */
+
+    public function showVoteId(int $id): string
+    {
+        $memeManager = new MemeManager();
+        $legendManager = new LegendManager();
+        $legend = $legendManager->selectOneById($id);
+        $meme = $memeManager->selectOneById($id);
+
+        return $this->twig->render('Meme/vote.html.twig', [
+            'meme' => $meme,
+            'legend' => $legend
+        ]);
+    }
+
     public function add(): ?string
     {
 
         $dataErrors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
             $newMeme = array_map('trim', $_POST);
-
-
             $uploadDir = __DIR__ . '/../../public/uploads/images/';
-
             $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-
             $fileName = uniqid() . '.' . $extension;
-
             $uploadFile = $uploadDir . basename($fileName);
-
             $authorizedExtensions = ['jpg', 'gif', 'webp', 'png'];
-
             $maxFileSize = 1000000;
 
             if ((!in_array($extension, $authorizedExtensions))) {
@@ -64,22 +63,22 @@ class MemeController extends AbstractController
             }
             if (empty($dataErrors)) {
                 $newMeme['image'] = $fileName;
-                $newMeme['user_id'] = 'NULL';
+                $newMeme['user_id'] =  $_SESSION['user_id'];
                 $memeManager = new MemeManager();
                 $insertId = $memeManager->insert($newMeme);
                 move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
                 if ($insertId) {
-                    header("Location: /meme/show?id=" . $insertId);
+                    header("Location: /");
                     return null;
                 }
             }
         }
         $categoryManager = new CategoryManager();
         $legendManager = new LegendManager();
+
         return $this->twig->render('Meme/create.html.twig', [
             'categories' => $categoryManager->selectAll(),
             'legends' => $legendManager->selectAll()
-
         ]);
     }
 }

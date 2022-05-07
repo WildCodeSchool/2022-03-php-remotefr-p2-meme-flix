@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\Model\UserManager;
 use App\Model\LegendManager;
 
 class MemeManager extends AbstractManager
@@ -27,23 +28,22 @@ class MemeManager extends AbstractManager
     public function insert(array $meme): int
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
-            " (`date`,  `image`, `category_id`)
-        VALUES (NOW(),  :image, :category_id)");
-        //@todo add user_id connexion
-        //$statement->bindValue('user_id', $meme['user_id'], \PDO::PARAM_INT);
+            " (`date`,  `image`, `category_id`, `user_id`)
+        VALUES (NOW(),  :image, :category_id, :user_id)");
         $statement->bindValue('image', $meme['image'], \PDO::PARAM_STR);
         $statement->bindValue('category_id', $meme['category'], \PDO::PARAM_INT);
-
+        //@todo add user_id connexion
+        $statement->bindValue('user_id', $meme['user_id'], \PDO::PARAM_INT);
         $statement->execute();
+
         $meme['id'] = (int)$this->pdo->lastInsertId();
         $legendManager = new LegendManager();
         $legendManager->insert($meme);
+
         return $meme['id'];
     }
 
-    /**
-     * Update meme in database
-     */
+
     public function update(array $meme): bool
     {
         $query = "UPDATE " . self::TABLE .

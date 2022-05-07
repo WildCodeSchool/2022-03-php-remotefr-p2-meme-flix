@@ -9,9 +9,6 @@ class CategoryManager extends AbstractManager
     public function selectDistinctAll(): array
     {
         $query = 'SELECT * FROM ' . static::TABLE;
-
-
-
         return $this->pdo->query($query)->fetchAll();
     }
 }
