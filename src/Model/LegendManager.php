@@ -21,7 +21,8 @@ class LegendManager extends AbstractManager
 
     public function insertLegendId(array $legendId)
     {
-        $query = "INSERT INTO " . VoteManager::TABLE . " (`legend_id`, legend_meme_id) VALUES (:legend_id, :legend_meme_id)";
+        $query = "INSERT INTO " . VoteManager::TABLE . " (`legend_id`, legend_meme_id)
+        VALUES (:legend_id, :legend_meme_id)";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('legend_id', $legendId['legend_id'], \PDO::PARAM_INT);
         $statement->bindValue('legend_meme_id', $legendId['legend_meme_id'], \PDO::PARAM_INT);
@@ -38,7 +39,5 @@ class LegendManager extends AbstractManager
         GROUP BY vote.legend_id";
 
         return $this->pdo->query($query)->fetchAll();
-
     }
-
 }

@@ -10,7 +10,6 @@ class UserController extends AbstractController
     {
         $dataErrors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
             $credentials = array_map('trim', $_POST);
             $credentials = array_map('htmlentities', $_POST);
 
