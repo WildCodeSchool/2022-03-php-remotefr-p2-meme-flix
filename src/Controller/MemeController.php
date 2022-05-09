@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Model\MemeManager;
+
+use App\Model\VoteManager;
 use App\Model\LegendManager;
 use App\Model\CategoryManager;
 
@@ -29,19 +31,23 @@ class MemeController extends AbstractController
     public function showVoteId(int $id): string
     {
         $memeManager = new MemeManager();
-        $legendManager = new LegendManager();
-        $legend = $legendManager->selectOneById($id);
         $meme = $memeManager->selectOneById($id);
+        $legendManager = new LegendManager();
+        $legends = $legendManager->selectAllAndVotesByMemeId($id);
 
         return $this->twig->render('Meme/vote.html.twig', [
             'meme' => $meme,
-            'legend' => $legend
+            'legends' => $legends
         ]);
     }
 
+
     public function add(): ?string
     {
-
+        if (!$this->user) {
+            header('Location: /register');
+            return null;
+        }
         $dataErrors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newMeme = array_map('trim', $_POST);
@@ -59,6 +65,8 @@ class MemeController extends AbstractController
             if (file_exists($_FILES['image']['tmp_name']) && filesize($_FILES['image']['tmp_name']) > $maxFileSize) {
                 $dataErrors[] = 'Ton image doit faire moins de 1Mo';
             }
+
+
             if (empty($dataErrors)) {
                 $newMeme['image'] = $fileName;
                 $newMeme['user_id'] =  $_SESSION['user_id'];
@@ -68,6 +76,8 @@ class MemeController extends AbstractController
                 if ($insertId) {
                     header("Location: /");
                     return null;
+                } else {
+                    return $dataErrors;
                 }
             }
         }
@@ -76,7 +86,24 @@ class MemeController extends AbstractController
 
         return $this->twig->render('Meme/create.html.twig', [
             'categories' => $categoryManager->selectAll(),
-            'legends' => $legendManager->selectAll()
+            'legends' => $legendManager->selectAll(),
+
+            'dataErrors' => $dataErrors
         ]);
+    }
+
+    public function addVote(int $id): ?string
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $newVote = [];
+            $newVote['id'] = $_POST['legend'];
+            $newVote['user_id'] = $this->user['id'];
+            $voteManager = new VoteManager();
+            $voteManager->insert($newVote);
+
+            header('Location:/vote?id=' . $id);
+            return null;
+        }
+
     }
 }

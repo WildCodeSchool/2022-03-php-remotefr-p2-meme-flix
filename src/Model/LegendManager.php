@@ -15,29 +15,22 @@ class LegendManager extends AbstractManager
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('meme_id', $meme['id'], \PDO::PARAM_INT);
         $statement->bindValue('legend', $meme['legend'], \PDO::PARAM_STR);
+
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
     }
 
-    public function insertLegendId(array $legendId)
-    {
-        $query = "INSERT INTO " . VoteManager::TABLE . " (`legend_id`, legend_meme_id)
-        VALUES (:legend_id, :legend_meme_id)";
-        $statement = $this->pdo->prepare($query);
-        $statement->bindValue('legend_id', $legendId['legend_id'], \PDO::PARAM_INT);
-        $statement->bindValue('legend_meme_id', $legendId['legend_meme_id'], \PDO::PARAM_INT);
-        $statement->execute();
-        return (int)$this->pdo->lastInsertId();
-    }
 
-    public function selectOneByIdAndVotes()
+    public function selectAllAndVotesByMemeId(int $memeId): array|false
     {
         $query = "SELECT *, COUNT(vote.legend_id) AS numVote FROM " . self::TABLE .
         " JOIN " . VoteManager::TABLE . " ON vote.legend_id=legend.id JOIN " .
         MemeManager::TABLE . " ON legend.meme_id=meme.id
-        WHERE legend.id=:legend.id
-        GROUP BY vote.legend_id";
+        WHERE meme.id=:meme_id GROUP BY vote.legend_id";
 
-        return $this->pdo->query($query)->fetchAll();
+        $statement = $this->pdo->prepare($query);
+        $statement->bindValue('meme_id', $memeId, \PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
     }
 }

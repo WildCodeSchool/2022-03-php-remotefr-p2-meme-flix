@@ -61,8 +61,8 @@ CREATE TABLE `legend` (
 CREATE TABLE `vote` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`user_id` INT NOT NULL,
-	`legend_id` INT NOT NULL,
-	`legend_meme_id` INT NOT NULL,
+	`legend_id` INT DEFAULT 0 NOT NULL,
+	`legend_meme_id` INT,
 	PRIMARY KEY (`id`),
 	INDEX `fk_vote_user1_idx` (`user_id` ASC) VISIBLE,
 	INDEX `fk_vote_legend1_idx` (`legend_id` ASC, `legend_meme_id` ASC) VISIBLE,

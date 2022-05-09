@@ -30,6 +30,7 @@
 					<div>
 						<label for="category" class="label-file"></label>
 						<select id="category" name="category" class="form-select btn btn-outline-danger bg-dark text-white mb-5" aria-label="Default select example">
+                        <option value="" disabled selected class="text-white">Choisis une catégorie</option>
 							{% for category in categories %}
 								<option value="{{category.id}}">
 									{{category.name}}

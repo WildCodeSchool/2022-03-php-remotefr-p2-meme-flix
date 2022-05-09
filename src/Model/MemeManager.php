@@ -22,9 +22,6 @@ class MemeManager extends AbstractManager
         return $this->pdo->query($query)->fetchAll();
     }
 
-    /**
-     * Insert new meme in database
-     */
     public function insert(array $meme): int
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
@@ -32,11 +29,10 @@ class MemeManager extends AbstractManager
         VALUES (NOW(),  :image, :category_id, :user_id)");
         $statement->bindValue('image', $meme['image'], \PDO::PARAM_STR);
         $statement->bindValue('category_id', $meme['category'], \PDO::PARAM_INT);
-        //@todo add user_id connexion
         $statement->bindValue('user_id', $meme['user_id'], \PDO::PARAM_INT);
         $statement->execute();
-
         $meme['id'] = (int)$this->pdo->lastInsertId();
+
         $legendManager = new LegendManager();
         $legendManager->insert($meme);
 
@@ -68,3 +64,4 @@ class MemeManager extends AbstractManager
         return $statement->execute();
     }
 }
+

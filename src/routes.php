@@ -18,6 +18,7 @@ return [
     'meme/edit' => ['MemeController', 'edit', ['id']],
     'meme/show' => ['MemeController', 'index'],
     'vote' => ['MemeController', 'showVoteId', ['id']],
+    'vote/add' => ['MemeController', 'addVote', ['id']],
     'items' => ['ItemController', 'index',],
     'items/edit' => ['ItemController', 'edit', ['id']],
     'items/show' => ['ItemController', 'show', ['id']],
