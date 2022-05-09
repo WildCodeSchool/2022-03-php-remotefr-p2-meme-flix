@@ -9,7 +9,6 @@ class UserManager extends AbstractManager
 
     public function selectOneByEmail(string $email): array|false
     {
-        
         $statement = $this->pdo->prepare("SELECT * FROM " . static::TABLE . " WHERE email=:email");
         $statement->bindValue('email', $email, \PDO::PARAM_STR);
         $statement->execute();

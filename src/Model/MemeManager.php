@@ -59,9 +59,6 @@ class MemeManager extends AbstractManager
 
         $statement->bindValue('category_id', $meme['category_id'], \PDO::PARAM_STR);
         $statement->bindValue('legend', $meme['legend'], \PDO::PARAM_STR);
-
-
         return $statement->execute();
     }
 }
-

@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-
 class VoteManager extends AbstractManager
 {
     public const TABLE = 'vote';
@@ -28,7 +27,4 @@ class VoteManager extends AbstractManager
     //     $statement->execute();
     //     return (int)$this->pdo->lastInsertId();
     // }
-
-
-
 }

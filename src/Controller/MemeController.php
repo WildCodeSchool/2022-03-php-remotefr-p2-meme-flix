@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Model\MemeManager;
-
+use App\Model\UserManager;
 use App\Model\VoteManager;
 use App\Model\LegendManager;
 use App\Model\CategoryManager;
@@ -16,6 +16,7 @@ class MemeController extends AbstractController
         $categories = $categoryManager->selectDistinctAll();
         $memeManager = new MemeManager();
         $memes = $memeManager->selectAll();
+
         return $this->twig->render('Home/index.html.twig', [
             'categories' => $categories,
             'memes' => $memes
@@ -76,8 +77,6 @@ class MemeController extends AbstractController
                 if ($insertId) {
                     header("Location: /");
                     return null;
-                } else {
-                    return $dataErrors;
                 }
             }
         }
@@ -87,12 +86,11 @@ class MemeController extends AbstractController
         return $this->twig->render('Meme/create.html.twig', [
             'categories' => $categoryManager->selectAll(),
             'legends' => $legendManager->selectAll(),
-
             'dataErrors' => $dataErrors
         ]);
     }
 
-    public function addVote(int $id): ?string
+    public function addVote(int $id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newVote = [];
@@ -104,6 +102,5 @@ class MemeController extends AbstractController
             header('Location:/vote?id=' . $id);
             return null;
         }
-
     }
 }
