@@ -36,6 +36,9 @@ class MemeManager extends AbstractManager
         $legendManager = new LegendManager();
         $legendManager->insert($meme);
 
+        $voteManager = new VoteManager();
+        $voteManager->insert($meme);
+
         return $meme['id'];
     }
 
