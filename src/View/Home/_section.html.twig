@@ -10,12 +10,16 @@
 			<div class="swiper-wrapper">
 				{% for meme in memes %}
 					<div class="swiper-slide">
-						<div class="d-flex flex-column ">
-							<h3 class="p-2 fs-5 fw-bold text-center bg-white rounded-top">
-								{{meme.legend}}
-							</h3>
-							<a href="/vote?id={{ meme.id }}" class="stretched-link"></a>
-							<img src="/uploads/images/{{ meme.image }}" class="img-fluid rounded-bottom" alt="...">
+						<div class="d-flex flex-column">
+							<div>
+								<h3 class="p-2 fs-6 fw-bold text-break text-center bg-white rounded-top text-truncate">
+									{{meme.legend}}
+								</h3>
+							</div>
+							<div>
+								<a href="/vote?id={{ meme.id }}" class="stretched-link"></a>
+								<img src="/uploads/images/{{ meme.image }}" class="rounded-bottom" alt="...">
+							</div>
 						</div>
 					</div>
 				{% endfor %}
@@ -25,5 +29,4 @@
 		</div>
 
 	</div>
-</div>
-</section>
+</div></section>
