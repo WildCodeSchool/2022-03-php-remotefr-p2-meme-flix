@@ -2,9 +2,6 @@
 
 namespace App\Model;
 
-use App\Model\MemeManager;
-use App\Model\VoteManager;
-
 class LegendManager extends AbstractManager
 {
     public const TABLE = 'legend';
@@ -15,7 +12,6 @@ class LegendManager extends AbstractManager
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('meme_id', $meme['id'], \PDO::PARAM_INT);
         $statement->bindValue('legend', $meme['legend'], \PDO::PARAM_STR);
-
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
     }

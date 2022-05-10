@@ -56,7 +56,7 @@ class MemeController extends AbstractController
             $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $fileName = uniqid() . '.' . $extension;
             $uploadFile = $uploadDir . basename($fileName);
-            $authorizedExtensions = ['jpg', 'gif', 'webp', 'png'];
+            $authorizedExtensions = ['jpg', 'gif', 'webp', 'png', 'jpeg'];
             $maxFileSize = 1000000;
 
             if ((!in_array($extension, $authorizedExtensions))) {
@@ -67,6 +67,13 @@ class MemeController extends AbstractController
                 $dataErrors[] = 'Ton image doit faire moins de 1Mo';
             }
 
+            if (empty($_POST['category'])) {
+                $dataErrors[] = 'Tu doit choisir une catégorie';
+            }
+
+            if (empty($_POST['legend'])) {
+                $dataErrors[] = 'Tu doit mettre un message';
+            }
 
             if (empty($dataErrors)) {
                 $newMeme['image'] = $fileName;
@@ -98,7 +105,6 @@ class MemeController extends AbstractController
             $newVote['user_id'] = $this->user['id'];
             $voteManager = new VoteManager();
             $voteManager->insert($newVote);
-
             header('Location:/vote?id=' . $id);
             return null;
         }

@@ -2,9 +2,6 @@
 
 namespace App\Model;
 
-use App\Model\UserManager;
-use App\Model\LegendManager;
-
 class MemeManager extends AbstractManager
 {
     public const TABLE = 'meme';
@@ -13,8 +10,6 @@ class MemeManager extends AbstractManager
     {
         $query = 'SELECT *, m.id FROM ' . static::TABLE . ' AS m INNER JOIN '
         . LegendManager::TABLE . ' AS l ON l.meme_id=m.id ';
-
-
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }
