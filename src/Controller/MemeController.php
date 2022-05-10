@@ -71,10 +71,6 @@ class MemeController extends AbstractController
                 $dataErrors[] = 'Tu doit choisir une catégorie';
             }
 
-            if (empty($_POST['legend'])) {
-                $dataErrors[] = 'Tu doit mettre un message';
-            }
-
             if (empty($dataErrors)) {
                 $newMeme['image'] = $fileName;
                 $newMeme['user_id'] =  $_SESSION['user_id'];
@@ -105,6 +101,7 @@ class MemeController extends AbstractController
             $newVote['user_id'] = $this->user['id'];
             $voteManager = new VoteManager();
             $voteManager->insert($newVote);
+
             header('Location:/vote?id=' . $id);
             return null;
         }
