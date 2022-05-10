@@ -1,63 +1,71 @@
--- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
---
--- Client :  localhost
--- Généré le :  Jeu 26 Octobre 2017 à 13:53
--- Version du serveur :  5.7.19-0ubuntu0.16.04.1
--- Version de PHP :  7.0.22-0ubuntu0.16.04.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données :  `simple-mvc`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `item`
---
-
 CREATE TABLE `item` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	`id` int(11) UNSIGNED NOT NULL,
+	`title` varchar(255) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
---
--- Contenu de la table `item`
---
+INSERT INTO
+	`item` (`id`, `title`)
+VALUES
+	(1, 'Stuff'),
+	(2, 'Doodads');
 
-INSERT INTO `item` (`id`, `title`) VALUES
-(1, 'Stuff'),
-(2, 'Doodads');
+ALTER TABLE `item` ADD PRIMARY KEY (`id`);
 
---
--- Index pour les tables exportées
---
+ALTER TABLE
+	`item`
+MODIFY
+	`id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	AUTO_INCREMENT = 3;
 
---
--- Index pour la table `item`
---
-ALTER TABLE `item`
-  ADD PRIMARY KEY (`id`);
+CREATE TABLE `user` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`pseudo` VARCHAR(255) NOT NULL,
+	`email` VARCHAR(255) NOT NULL,
+	`password` VARCHAR(255) NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
 
---
--- AUTO_INCREMENT pour les tables exportées
---
+CREATE TABLE `category` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
 
---
--- AUTO_INCREMENT pour la table `item`
---
-ALTER TABLE `item`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO
+	`category`
+VALUES
+	(1, 'Sport'),(2, 'Véhicule'),(3, 'Personnes'),(4, 'Animaux'),(5, 'Divers');
+
+CREATE TABLE `meme` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`date` DATETIME NOT NULL,
+	`user_id` INT DEFAULT NULL,
+	`image` VARCHAR(255) NOT NULL,
+	`category_id` INT NOT NULL,
+	PRIMARY KEY (`id`, `category_id`),
+	INDEX `fk_meme_user1_idx` (`user_id` ASC) VISIBLE,
+	INDEX `fk_meme_category1_idx` (`category_id` ASC) VISIBLE,
+	CONSTRAINT `fk_meme_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT `fk_meme_category1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+CREATE TABLE `legend` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`legend` VARCHAR(255) NOT NULL,
+	`meme_id` INT NOT NULL,
+	PRIMARY KEY (`id`, `meme_id`),
+	INDEX `fk_legend_meme_idx` (`meme_id` ASC) VISIBLE,
+	CONSTRAINT `fk_legend_meme` FOREIGN KEY (`meme_id`) REFERENCES `meme` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+CREATE TABLE `vote` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`user_id` INT NOT NULL,
+	`legend_id` INT DEFAULT 0 NOT NULL,
+	`legend_meme_id` INT,
+	PRIMARY KEY (`id`),
+	INDEX `fk_vote_user1_idx` (`user_id` ASC) VISIBLE,
+	INDEX `fk_vote_legend1_idx` (`legend_id` ASC, `legend_meme_id` ASC) VISIBLE,
+	CONSTRAINT `fk_vote_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT `fk_vote_legend1` FOREIGN KEY (`legend_id`, `legend_meme_id`) REFERENCES `legend` (`id`, `meme_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE = InnoDB;

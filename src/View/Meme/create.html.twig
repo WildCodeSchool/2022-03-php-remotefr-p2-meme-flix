@@ -1,0 +1,71 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}
+	<link rel="stylesheet" href="/assets/css/Create/create.css">
+{% endblock %}
+
+{% block content %}
+
+
+	<h1 class="text-center mt-5 mb-5">
+		Crée ton MEME
+	</h1>
+	<form method="post" enctype="multipart/form-data">
+		<div class="container">
+			<div class="row">
+				<div class="p-5 col-lg-6">
+					<p class="bg-white mb-0 p-3 rounded-top text-center fw-bold">
+						Quand tu comprends que tu vas utiliser le MVC pour ton projet 2
+					</p>
+
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==" id="image" class="w-100 img-fluid rounded-bottom" alt="your image">
+					<label for="image" class="label-file"></label>
+					<input type="file" name="image" id="image" class="input-file w-100 mt-3 mb-3 btn btn-outline-danger btn-lg text-center" onchange="preview_image(event)">
+				</div>
+				<div class="p-5 col-lg-6">
+
+					<p class="text-white mt-5 mb-5 text-center fs-4">
+						Attention un message drôle est fortement recommandé :)
+					</p>
+					<div>
+						<label for="category" class="label-file"></label>
+						<select id="category" name="category" class="form-select btn btn-outline-danger bg-dark text-white mb-5" aria-label="Default select example">
+                        <option value="" disabled selected class="text-white">Choisis une catégorie</option>
+							{% for category in categories %}
+								<option value="{{category.id}}">
+									{{category.name}}
+								</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="mb-3 mt-3 text-center">
+						<label for="legend" class="form-label"></label>
+						<textarea class="form-control text-center mb-5" id="legend" name="legend" rows="2" placeholder="Indique ta légende"></textarea>
+						<input value="valider" type="submit" style="width: 10rem" class="mb-5 mt-5 btn btn-outline-danger btn-lg text-center">
+					</div>
+					<div>
+						{% if dataErrors %}
+							<div class="p-0 fw-bold fs-5 list-group-item-disabled text-center" style="color:var(--bs-primary)">
+								{% for error in dataErrors %}
+									<p>{{ error }}</p>
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+	<script>
+		function preview_image(event) {
+let reader = new FileReader();
+reader.onload = function () {
+let output = document.getElementById('image');
+output.src = reader.result;
+}
+reader.readAsDataURL(event.target.files[0]);
+}
+	</script>
+{% endblock %}

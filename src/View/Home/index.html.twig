@@ -1,5 +1,76 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheet %}
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+	<link rel="stylesheet" href="/assets/css/swiper.css">
+{% endblock %}
+
 {% block content %}
-    <h1>Hello Wilder !</h1>
+
+	<div class="container-fluid">
+		<div class="row mt-5">
+			<div class="col-lg-5 mb-5 d-flex flex-column">
+				<h3 class="p-2 text-center fs-5 fw-bold bg-white rounded-top mx-auto" style="width: 50%">
+					Toi le matin quand ......
+				</h3>
+				<a href="/" class="stretched-link"></a>
+				<img src="https://picsum.photos/200/200?random={{ loop.index }}" class=" rounded-bottom mx-auto" style="width: 50%" ; alt="..."></div>
+			<div class="col-lg-7 text-center d-flex align-items-center justify-content-center">
+				<h1>
+					Toi aussi crée ton
+					<a href="">
+						MEME
+					</a>
+					c'est&nbsp;ICI
+				</h1>
+				<a href="/create" class="stretched-link"></a>
+			</div>
+		</div>
+	</div>
+
+	{# //////////////////////section top 10////////////////////////////// #}
+
+	{% include 'Home/_section.html.twig' with { 'title':'Top 10', 'memes':memes } %}
+
+	{# ///////////////////////////////section nouveautés/////////////////////////// #}
+
+	{% include 'Home/_section.html.twig' with { 'title':'Nouveautés', 'memes':memes|sort((a, b) => a.date <=> b.date)|reverse|slice(0, 15) } %}
+
+	{# /////////////////////////////section categories///////////////////////////// #}
+
+	{% for category in categories %}
+		{% include 'Home/_section.html.twig' with { 'title': category.name , 'memes':memes|filter(meme => meme.category_id == category.id) } %}
+	{% endfor %}
+{% endblock %}
+{% block javascript %}
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script>
+		let swiper = new Swiper('.swiper-container', {
+navigation: {
+nextEl: '.swiper-button-next',
+prevEl: '.swiper-button-prev'
+},
+spaceBetween: 15,
+pagination: {
+el: ".swiper-pagination",
+clickable: true
+},
+breakpoints: { // when window width is >= 320px
+320: {
+slidesPerView: 2
+},
+// when window width is >= 480px
+768: {
+slidesPerView: 3
+},
+992: {
+slidesPerView: 4
+},
+// when window width is >= 1000px
+1400: {
+slidesPerView: 6
+}
+}
+});
+	</script>
 {% endblock %}

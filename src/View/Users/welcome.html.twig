@@ -1,0 +1,37 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheet %}<link rel="stylesheet" href="/assets/css/Users/connect.css">
+{% endblock %}
+
+{% block content %}
+
+
+	<h1 class="text-center mb-5 mt-5">Welcome
+		<a href="">{{ user.pseudo }}</a>
+		te voilà Memer Member</h1>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 p-5">
+				<p class="bg-white mb-0 p-3 fs-5 rounded-top fw-bold text-center">
+					Alors content de nous rejoindre
+				</p>
+				<img id="image" src="assets/images/madcat.jpg" class="img-fluid" alt="your image">
+			</div>
+			<div class="col-lg-6 p-5 mt-5">
+				<div class="p-3 text-center">
+					<p class="text-white fs-3 text-justify">Merci de nous rejoindre ami du MEME, ta mission sera de créer les MEMES les plus drôles possibles. Tu disposes d'une
+																		                    page pour créer un
+						<a href="/create">MEME</a>
+						ou tu peux dès maintenant rejoindre la galerie de nos artistes du MEME et ta mission commencera dès que tu cliqueras sur le lien ci-dessous !
+					</p>
+					<a href="/">
+						<input value="Entrer" type="submit" style="width: 10rem" class="mb-5 mt-5 btn btn-outline-danger btn-lg text-center">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+<section class="text">
+	<div class="container-fluid ">
+		<div class="row text-start mb-3 mt-3">
+			<div class="col-md-12">
+				<h2>{{ title }}</h2>
+			</div>
+		</div>
+		<!-- Swiper -->
+		<div class="swiper-container overflow-hidden w-100 position-relative">
+			<div class="swiper-wrapper">
+				{% for meme in memes %}
+					<div class="swiper-slide">
+						<div class="d-flex flex-column ">
+							<h3 class="p-2 fs-5 fw-bold text-center bg-white rounded-top">
+								{{meme.legend}}
+							</h3>
+							<a href="/vote?id={{ meme.id }}" class="stretched-link"></a>
+							<img src="/uploads/images/{{ meme.image }}" class="img-fluid rounded-bottom" alt="...">
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		</div>
+
+	</div>
+</div>
+</section>
