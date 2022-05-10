@@ -13,27 +13,26 @@
 			<li class="nav-item">
 				<a class="nav-link text-white fs-5" href="/register">Inscription</a>
 			</li>
+            {% if user %}
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					<i class="text-white fs-5">hello
 						{{ user.pseudo }}
 					</i>
 				</a>
-				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink"></li>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
 			</li>
-                    <li>
-                        <a class="dropdown-item" href="/logout">
-                            <i class="bi bi-box-arrow-right"></i>
-                            Disconnect</a>
-                    </li>
-                </ul>
-	    </ul>
-            <a class="navbar-nav col-2-ms" href="/login">
-                <img src="/assets/images/logo_user.png" alt="logo_user" width="40" height="40">
+			<li>
+				<a class="dropdown-item" href="/logout">
+					<i class="bi bi-box-arrow-right"></i>
+					Disconnect</a>
+			</li>
+		</ul>
+	</ul>
+    {% endif %}
+	<a class="navbar-nav col-2-ms" href="/login">
+		<img src="/assets/images/logo_user.png" alt="logo_user" width="40" height="40">
 
-            </a>
-            <a href="/logout" class="d-lg-none">Disconnect</a>
-    </div>
-</nav>
-
-
+	</a>
+	<a href="/logout" class="d-lg-none">Disconnect</a>
+</div></nav>
