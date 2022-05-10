@@ -13,7 +13,6 @@ class UserController extends AbstractController
             $credentials = array_map('trim', $_POST);
             $credentials = array_map('htmlentities', $_POST);
 
-
             if (empty($credentials["email"])) {
                 $dataErrors[] = "Ton adresse mail est obligatoire";
             }
@@ -39,7 +38,6 @@ class UserController extends AbstractController
         ]);
     }
 
-
     public function logout()
     {
         unset($_SESSION['user_id']);
@@ -59,7 +57,6 @@ class UserController extends AbstractController
                 $dataErrors[] = "Ton pseudo est obligatoire";
             }
 
-
             if (empty($credentials["email"])) {
                 $dataErrors[] = "Ton adresse mail est obligatoire";
             }
@@ -75,7 +72,6 @@ class UserController extends AbstractController
             if (strlen($credentials['password']) < 8) {
                 $dataErrors[] = "Le mot de passe doit avoir au minimun 8 Caractères";
             }
-
 
             if (empty($dataErrors)) {
                 $userManager = new UserManager();
@@ -93,7 +89,6 @@ class UserController extends AbstractController
 
     public function welcome(): string
     {
-
         return $this->twig->render('Users/welcome.html.twig');
     }
 }
