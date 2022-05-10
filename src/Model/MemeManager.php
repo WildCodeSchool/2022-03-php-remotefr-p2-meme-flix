@@ -8,8 +8,9 @@ class MemeManager extends AbstractManager
 
     public function selectAll(string $orderBy = '', string $direction = 'ASC'): array
     {
-        $query = 'SELECT *, m.id FROM ' . static::TABLE . ' AS m INNER JOIN '
-        . LegendManager::TABLE . ' AS l ON l.meme_id=m.id ';
+        $query = 'SELECT l.*, m.*, m.id, COUNT(v.legend_id) AS numVotes FROM ' . static::TABLE . ' AS m LEFT JOIN '
+        . LegendManager::TABLE . ' AS l ON l.meme_id=m.id LEFT JOIN ' . VoteManager::TABLE . ' v ON v.legend_id=l.id
+        GROUP BY m.id, l.id  ORDER BY numVotes DESC';
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }

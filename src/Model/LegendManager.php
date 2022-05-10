@@ -20,9 +20,9 @@ class LegendManager extends AbstractManager
     public function selectAllAndVotesByMemeId(int $memeId): array|false
     {
         $query = "SELECT *, COUNT(vote.legend_id) AS numVote FROM " . self::TABLE .
-        " JOIN " . VoteManager::TABLE . " ON vote.legend_id=legend.id JOIN " .
+        " LEFT JOIN " . VoteManager::TABLE . " ON vote.legend_id=legend.id JOIN " .
         MemeManager::TABLE . " ON legend.meme_id=meme.id
-        WHERE meme.id=:meme_id GROUP BY vote.legend_id";
+        WHERE meme.id=:meme_id GROUP BY vote.legend_id ORDER BY numVote DESC";
 
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('meme_id', $memeId, \PDO::PARAM_INT);

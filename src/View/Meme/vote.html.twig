@@ -14,13 +14,14 @@
 
             <div class="container">
                 <div class="row">
-                    {% for legend in legends %}
+
                         <div class="p-5 col-lg-5">
                             <p class="bg-white mb-0 p-3 rounded-top text-center fw-bold">
-                                {{ legend.legend }}
+                                {{ legends.0.legend }}
                             </p>
-                            <img id="image" src="/uploads/images/{{ meme.image }}" class="w-100 img-fluid rounded-bottom" alt="your image"></div>
-                        {% endfor %}
+                            <img id="image" src="/uploads/images/{{ meme.image }}" class="w-100 img-fluid rounded-bottom" alt="your image">
+                        </div>
+
                         <div class="p-5 col-lg-7 fs-5">
                             <p class="text-white mt-3 mb-5 text-center">
                                 Attention un message drôle est fortement recommandé :)
