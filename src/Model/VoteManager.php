@@ -12,7 +12,7 @@ class VoteManager extends AbstractManager
         VALUES (:user_id, :legend_id)";
         $statement = $this->pdo->prepare($query);
         $statement->bindValue('user_id', $vote['user_id'], \PDO::PARAM_INT);
-        $statement->bindValue('legend_id', $vote['id'], \PDO::PARAM_INT);
+        $statement->bindValue('legend_id', $vote['legend_id'], \PDO::PARAM_INT);
         //@ maybe todo//
         // $statement->bindValue('legend_meme_id', $meme['legend_meme_id'], \PDO::PARAM_INT);
         $statement->execute();

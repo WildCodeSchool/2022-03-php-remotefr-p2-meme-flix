@@ -8,8 +8,9 @@ class MemeManager extends AbstractManager
 
     public function selectAll(string $orderBy = '', string $direction = 'ASC'): array
     {
-        $query = 'SELECT *, m.id FROM ' . static::TABLE . ' AS m INNER JOIN '
-        . LegendManager::TABLE . ' AS l ON l.meme_id=m.id ';
+        $query = 'SELECT l.*, m.*, m.id, COUNT(v.legend_id) AS numVotes FROM ' . static::TABLE . ' AS m LEFT JOIN '
+        . LegendManager::TABLE . ' AS l ON l.meme_id=m.id LEFT JOIN ' . VoteManager::TABLE . ' v ON v.legend_id=l.id
+        GROUP BY m.id, l.id  ORDER BY numVotes DESC';
         if ($orderBy) {
             $query .= ' ORDER BY ' . $orderBy . ' ' . $direction;
         }
@@ -26,15 +27,17 @@ class MemeManager extends AbstractManager
         $statement->bindValue('category_id', $meme['category'], \PDO::PARAM_INT);
         $statement->bindValue('user_id', $meme['user_id'], \PDO::PARAM_INT);
         $statement->execute();
-        $meme['id'] = (int)$this->pdo->lastInsertId();
+        $meme['meme_id'] = (int)$this->pdo->lastInsertId();
 
         $legendManager = new LegendManager();
-        $legendManager->insert($meme);
+        $newVote = [];
+        $newVote['legend_id'] = $legendManager->insert($meme);
+        $newVote['user_id'] = $meme['user_id'];
 
         $voteManager = new VoteManager();
-        $voteManager->insert($meme);
+        $voteManager->insert($newVote);
 
-        return $meme['id'];
+        return $meme['meme_id'];
     }
 
 

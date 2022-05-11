@@ -73,7 +73,7 @@ class MemeController extends AbstractController
 
             if (empty($dataErrors)) {
                 $newMeme['image'] = $fileName;
-                $newMeme['user_id'] =  $_SESSION['user_id'];
+                $newMeme['user_id'] =  $this->user['id'];
                 $memeManager = new MemeManager();
                 $insertId = $memeManager->insert($newMeme);
                 move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
@@ -93,17 +93,33 @@ class MemeController extends AbstractController
         ]);
     }
 
-    public function addVote(int $id)
+    public function addVote(int $memeid)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newVote = [];
-            $newVote['id'] = $_POST['legend'];
+            $newVote['legend_id'] = $_POST['legend'];
             $newVote['user_id'] = $this->user['id'];
             $voteManager = new VoteManager();
             $voteManager->insert($newVote);
 
-            header('Location:/vote?id=' . $id);
+            header('Location:/vote?id=' . $memeid);
             return null;
         }
     }
+
+    public function addLegend()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $newLegend = [];
+            $newLegend['legend'] = $_POST['legend'];
+            $newLegend['user_id'] = $this->user['id'];
+            $newLegend['meme_id'] = $_POST['meme_id'];//input hidden
+            $legendManager = new legendManager();
+            $legendManager->insert($newLegend);
+
+            header('Location:/vote?id=' . $_POST['meme_id']);
+            return null;
+        }
+    }
+
 }
