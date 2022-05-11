@@ -53,8 +53,10 @@ CREATE TABLE `legend` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`legend` VARCHAR(255) NOT NULL,
 	`meme_id` INT NOT NULL,
+    `user_id` INT NOT NULL,
 	PRIMARY KEY (`id`, `meme_id`),
 	INDEX `fk_legend_meme_idx` (`meme_id` ASC) VISIBLE,
+	CONSTRAINT `fk_legend_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 	CONSTRAINT `fk_legend_meme` FOREIGN KEY (`meme_id`) REFERENCES `meme` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
 
