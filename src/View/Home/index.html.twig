@@ -30,7 +30,7 @@
 
 	{# //////////////////////section top 10////////////////////////////// #}
 
-	{% include 'Home/_section.html.twig' with { 'title':'Top 10', 'memes':memes } %}
+	{% include 'Home/_section.html.twig' with { 'title':'Top 10', 'memes':memes|slice(0, 10) } %}
 
 	{# ///////////////////////////////section nouveautés/////////////////////////// #}
 
